@@ -1,0 +1,186 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow,noarchive" />
+<script type="text/javascript">
+function showimg1(){
+     document.getElementById("area1").src = "haikei00.png";
+}
+function showimg2(){
+     document.getElementById("area1").src = "haikei01.png";
+}
+function showimg3(){
+     document.getElementById("area1").src = "haikei02.png";
+}
+function showimg4(){
+     document.getElementById("area1").src = "haikei03.png";
+}
+function showimg5(){
+     document.getElementById("area1").src = "haikei04.png";
+}
+function showimg6(){
+     document.getElementById("area1").src = "haikei05.png";
+}
+function showimg7(){
+     document.getElementById("area1").src = "haikei06.png";
+}
+function showimg8(){
+     document.getElementById("area1").src = "haikei07.png";
+}
+function showimg9(){
+     document.getElementById("area1").src = "haikei08.png";
+}
+function showimg10(){
+     document.getElementById("area1").src = "haikei09.png";
+}
+</script>
+
+<style>
+#mainImage {
+    margin: 0 auto 0px auto;
+    width: 100%;
+    position: relative;
+    border: none;
+    padding: 0;
+}
+
+#mainImage .img-haikei {
+    max-height: 500px;
+    width: 100%;
+}
+
+#mainImage .img-haikei video.movieBg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#mainImage img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: block;
+}
+</style>
+
+</head>
+<body>
+<center>
+
+<div id="mainImage">
+　　<div class="img-haikei">
+    <input type="image" src="back.png" width=200 onClick="seekDown()">
+    <video id="video" height="400" width="710" controls>
+        <source src="sample.mp4">
+    </video>
+    <input type="image" src="forward.png" width=200 onClick="seekUp()">
+
+　　</div>
+　　<img src="haikei00.png" id="area1" >
+</div>
+    </td>
+<hr>
+<p>
+<span onclick="showimg1()"><img src="haikeibt0.png" width="130"></span>
+<span onclick="showimg2()"><img src="haikeibt1.png" width="130"></span>
+<span onclick="showimg3()"><img src="haikeibt2.png" width="130"></span>
+<span onclick="showimg4()"><img src="haikeibt3.png" width="130"></span>
+<span onclick="showimg5()"><img src="haikeibt4.png" width="130"></span>
+<br>
+<span onclick="showimg6()"><img src="haikeibt5.png" width="130"></span>
+<span onclick="showimg7()"><img src="haikeibt6.png" width="130"></span>
+<span onclick="showimg8()"><img src="haikeibt7.png" width="130"></span>
+<span onclick="showimg9()"><img src="haikeibt8.png" width="130"></span>
+<span onclick="showimg10()"><img src="haikeibt9.png" width="130"></span>
+</p>
+<hr>
+    <div>
+    <input type="button" value="PLAY" onClick="playVideo()">
+    <input type="button" value="STOP" onClick="pauseVideo()"> 
+    <input type="button" value="-0.1/bpm" onClick="fast()">
+    <input type="button" value="+0.1/bpm" onClick="slow()">
+    <input type="button" value="Original Speed" onClick="setSpeed(1)">
+    <br>
+現在のフレーム数：<span id="position">0</span><br>
+全フレーム数：<span id="length"></span><br>
+再生速度  ：<span id="speed">1.0</span><br>
+    <span id="message"></span>
+</div>
+
+</center>
+
+
+<script>
+    var v;
+
+    function init_video(){
+        v = document.getElementById("video");
+
+        v.onloadeddata = function()
+        {
+            document.getElementById("length").innerHTML = v.duration;
+        }
+
+        v.addEventListener("timeupdate", function(){
+            document.getElementById("position").innerHTML = v.currentTime;
+            document.getElementById("speed").innerHTML = v.playbackRate.toFixed(1);
+        }, false);
+
+        v.addEventListener("ended", function(){
+            document.getElementById("message").innerHTML = "finished";
+        }, false);
+
+        v.addEventListener("pause", function(){
+            document.getElementById("message").innerHTML = "paused";
+        },false);
+    }
+
+    function playVideo() {
+        document.getElementById("message").innerHTML = "playing..";
+        v.play();
+
+    }
+
+    function pauseVideo() {
+        v.pause();
+    }
+
+    function seekUp() {
+        v.currentTime += 1;
+    }
+
+    function seekDown() {
+        v.currentTime -= 1;
+    }
+
+    function seekToTop(){
+        v.currentTime = 0;
+    }
+
+    function seekToLast(){
+        v.currentTime = v.duration;
+    }
+
+    function slow() {
+        v.playbackRate += 0.1;
+    }
+
+    function setSpeed( speed ) {
+        if ( speed < 0.1 ){
+            speed = 0.1;
+        }
+        v.playbackRate = speed;
+    }
+
+    function fast() {
+        if ( v.playbackRate > 0.1){
+            v.playbackRate -= 0.1;
+        }
+    }
+    init_video();
+</script>
+</body>
+</html>
